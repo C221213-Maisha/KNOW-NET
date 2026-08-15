@@ -30,7 +30,7 @@ The proliferation of online misinformation requires robust detection systems, ye
 
 ## Architecture Overview
 
-![Proposed Methodology](figures/Proposed Methodology.png)
+![Proposed Methodology](figures/Proposed_Methodology.png)
 
 The complete experimental workflow, from data sources through result analysis, is shown below.
 

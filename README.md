@@ -9,6 +9,8 @@ Official implementation of **KNOW-NET**, published at the *2026 IEEE 2nd Interna
 
 **DOI:** [10.1109/QPAIN69676.2026.11546260](https://doi.org/10.1109/QPAIN69676.2026.11546260)
 
+The full published paper is not hosted in this repository. It can be accessed via the DOI link above, through IEEE Xplore.
+
 ## Authors
 
 - Mahfuza Maisha, Department of Computer Science and Engineering, International Islamic University Chittagong (maisha.mahfuza13@gmail.com)
@@ -28,26 +30,19 @@ The proliferation of online misinformation requires robust detection systems, ye
 
 ## Architecture Overview
 
-```
-Raw News Titles
-      |
-Text Cleaning -> Bias Mitigation -> Named Entity Recognition (spaCy)
-      |
-Entity Linking (DBpedia) -> Knowledge Embedding -> Stratified Split
-      |
-RoBERTa Text Encoder (first 6 layers frozen)      DBpedia Entity Embeddings
-      |                                                    |
-      +-------------------- Cross-Attention Fusion --------+
-                                  |
-                    Shared Fused Representation
-                       /                    \
-        Classification Head              NER Head
-      (Dense + Sigmoid)              (Token-level IOB2)
-                       \                    /
-                    Multi-Task Loss (Eq. 4)
-```
+![Proposed Methodology](figures/Proposed_Methodology.png)
 
-Full mathematical formulation, training algorithm, and diagrams are provided in the paper (Section III).
+The complete experimental workflow, from data sources through result analysis, is shown below.
+
+![Workflow](figures/Workflow.png)
+
+Full mathematical formulation, training algorithm, and diagrams are provided in Section III of the paper, accessible via the DOI at the top of this README.
+
+## Data Preprocessing Pipeline
+
+![Data Preprocessing Pipeline](figures/DataPreprocessing_Pipeline.png)
+
+Preprocessing steps include text cleaning, bias mitigation (removal of 28 publisher and political terms), named entity recognition via spaCy, entity linking to DBpedia, knowledge embedding generation, and a stratified 80/10/10 train, validation, and test split.
 
 ## Results Summary
 
@@ -61,9 +56,25 @@ Full mathematical formulation, training algorithm, and diagrams are provided in 
 | ExtraTree | 0.9611 | 0.9611 | Tree-based |
 | LSTM | 0.5080 | 0.3369 | LSTM |
 
+![Performance Comparison](figures/performance_comparison.png)
+
 Statistical significance: paired t-test t = 4.1759, p = 3.1 x 10^-5; McNemar's test p = 3.8 x 10^-5; Cohen's d = 0.0816; 95 percent CI [0.0075, 0.0208].
 
+![Statistical Analysis](figures/statistical_tests.png)
+
 Ablation study: removing cross-attention causes the largest drop (-1.05 percent), followed by removing KG embeddings (-1.55 percent) and removing the NER head (-0.55 percent), confirming that all three components contribute meaningfully to performance.
+
+### Training Dynamics
+
+![Training Curves](figures/training_curves.png)
+
+KNOW-NET shows slower initial convergence due to multi-task learning but continues improving through all 10 epochs (best validation F1 of 0.9767), while DEAP-FAKED converges faster but plateaus earlier (best validation F1 of 0.9702) with early stopping triggered at epoch 6.
+
+### Error Analysis
+
+![Confusion Matrices](figures/confusion_matrices.png)
+
+KNOW-NET maintains a more balanced error profile (1.63 percent false positive rate, 1.28 percent false negative rate) compared to DEAP-FAKED, indicating no systematic class bias.
 
 Full results, confusion matrices, and architectural comparisons against 2024-2025 knowledge-aware methods are available in Sections IV and V of the paper.
 
@@ -76,9 +87,22 @@ Full results, confusion matrices, and architectural comparisons against 2024-202
 │   ├── Base Model Implementation (DeepFake).ipynb
 │   ├── KnowNet_OtherBaselines.ipynb
 │   └── KnowNet Implementation with all Visualizations and Statistical Analysis.ipynb
-├── LICENSE
+├── figures/
+│   ├── Proposed_Methodology.png
+│   ├── Workflow.png
+│   ├── DataPreprocessing_Pipeline.png
+│   ├── performance_comparison.png
+│   ├── statistical_tests.png
+│   ├── training_curves.png
+│   └── confusion_matrices.png
+├── references.bib
 └── README.md
 ```
+
+### Folder Descriptions
+
+- **Implementations**: Contains the four Jupyter notebooks used to preprocess data, train KNOW-NET, train all baseline models, and run statistical and ablation analyses. See below for details on each notebook.
+- **figures**: Original diagrams and result visualizations generated for the paper, referenced throughout this README.
 
 ### Notebook Descriptions
 
@@ -86,6 +110,10 @@ Full results, confusion matrices, and architectural comparisons against 2024-202
 - **Base Model Implementation (DeepFake).ipynb**: Reimplementation of the DEAP-FAKED baseline using DBpedia embeddings under identical preprocessing and splits.
 - **KnowNet_OtherBaselines.ipynb**: Implementation of the remaining baseline models, including ExtraTreeClassifier, LSTM, SentRoBERTa, StackedBiLSTM, and EntWiki-StackedBiLSTM.
 - **KnowNet Implementation with all Visualizations and Statistical Analysis.ipynb**: Full KNOW-NET model implementation, along with statistical significance testing, effect size analysis, and result visualizations.
+
+## References
+
+Full citation details for the papers referenced in this work, including DEAP-FAKED and the other prior methods discussed in the literature review, are listed in [`references.bib`](references.bib). This repository does not host the PDFs of third-party publications; each entry includes a DOI or link to the original publisher.
 
 ## Dataset
 
@@ -153,7 +181,7 @@ If you use this work, please cite:
 
 Copyright (c) 2026 Mahfuza Maisha, Umme Kawsher, Zinnia Sultana. All rights reserved.
 
-This repository is shared for reference and academic transparency purposes only. No license is granted to use, copy, modify, distribute, or create derivative works from this code without prior written permission from the main author. For permission requests, please contact maisha.mahfuza13@gmail.com.
+This repository is shared for reference and academic transparency purposes only. No license is granted to use, copy, modify, distribute, or create derivative works from this code without prior written permission from the authors. For permission requests, please contact maisha.mahfuza13@gmail.com.
 
 ## Contact
 

@@ -30,7 +30,7 @@ The proliferation of online misinformation requires robust detection systems, ye
 
 ## Architecture Overview
 
-![Proposed Methodology](figures/Proposed_Methodology.png)
+![Proposed Methodology](figures/Proposed Methodology.png)
 
 The complete experimental workflow, from data sources through result analysis, is shown below.
 
@@ -88,7 +88,7 @@ Full results, confusion matrices, and architectural comparisons against 2024-202
 │   ├── KnowNet_OtherBaselines.ipynb
 │   └── KnowNet Implementation with all Visualizations and Statistical Analysis.ipynb
 ├── figures/
-│   ├── Proposed_Methodology.png
+│   ├── Proposed Methodology.png
 │   ├── Workflow.png
 │   ├── DataPreprocessing_Pipeline.png
 │   ├── performance_comparison.png
@@ -117,7 +117,7 @@ Full citation details for the papers referenced in this work, including DEAP-FAK
 
 ## Dataset
 
-This project uses the [Kaggle Fake News dataset](https://www.kaggle.com/c/fakenews/overview) enriched with DBpedia knowledge graph embeddings, spaCy-derived NER labels, and the preprocessing steps described in the paper.
+This project uses the [Kaggle Fake News datasets](https://www.kaggle.com/datasets/emineyetm/fake-news-detection-datasets) enriched with DBpedia knowledge graph embeddings, spaCy-derived NER labels, and the preprocessing steps described in the paper.
 
 The processed dataset files exceed GitHub's size limits and are therefore hosted on Kaggle instead of this repository:
 
@@ -179,9 +179,11 @@ If you use this work, please cite:
 
 ## License
 
-Copyright (c) 2026 Mahfuza Maisha, Umme Kawsher, Zinnia Sultana. All rights reserved.
+Copyright (c) 2026 Mahfuza Maisha, Umme Kawsher, Zinnia Sultana. 
 
-This repository is shared for reference and academic transparency purposes only. No license is granted to use, copy, modify, distribute, or create derivative works from this code without prior written permission from the authors. For permission requests, please contact maisha.mahfuza13@gmail.com.
+All rights reserved.
+
+This repository is shared for reference and academic transparency purposes only. No license is granted to use, copy, modify, distribute, or create derivative works from this code without prior written permission from the main author. For permission requests, please contact maisha.mahfuza13@gmail.com.
 
 ## Contact
 
